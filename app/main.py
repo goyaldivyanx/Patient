@@ -3,6 +3,21 @@ import json
 from pydantic import BaseModel,computed_field
 import os
 
+
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+# Allow all origins for development/testing
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # or replace with your actual frontend domain in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 app = FastAPI()
 
 
