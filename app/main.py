@@ -17,12 +17,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-app = FastAPI()
-
-
-
-
 #function to laod data from json
 def load_all_data():
     base_dir = os.path.dirname(__file__)

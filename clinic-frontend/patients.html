@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All Patients</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-6">
+  <div class="max-w-6xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6 text-center text-blue-700">📋 All Patients</h1>
+
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg p-4">
+      <table class="min-w-full table-auto border border-gray-200" id="patientsTable">
+        <thead class="bg-blue-100 text-gray-700">
+          <tr id="tableHeader">
+            <!-- Headers will be injected dynamically -->
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Data will be injected here -->
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center mt-4">
+      <a href="index.html" class="text-blue-600 hover:underline">← Back to Dashboard</a>
+    </div>
+  </div>
+
+  <script>
+    const BASE_URL = "https://patient-zdg8.onrender.com";
+
+    async function fetchAllPatients() {
+      try {
+        const res = await fetch(`${BASE_URL}/allpatient`);
+        const data = await res.json();
+
+        const tableHeader = document.getElementById("tableHeader");
+        const tableBody = document.getElementById("tableBody");
+
+        // Extract and create table headers dynamically
+        const keys = Object.keys(Object.values(data)[0]);
+        tableHeader.innerHTML = "<th class='border px-4 py-2'>Patient ID</th>" +
+          keys.map(key => `<th class='border px-4 py-2'>${key}</th>`).join("");
+
+        // Populate rows
+        for (const id in data) {
+          const rowData = data[id];
+          let row = `<td class='border px-4 py-2 font-bold'>${id}</td>`;
+          for (const key of keys) {
+            row += `<td class='border px-4 py-2'>${rowData[key]}</td>`;
+          }
+          tableBody.innerHTML += `<tr>${row}</tr>`;
+        }
+      } catch (error) {
+        document.getElementById("patientsTable").innerHTML = `<tr><td class="text-red-500 p-4">Failed to load data.</td></tr>`;
+      }
+    }
+
+    fetchAllPatients();
+  </script>
+</body>
+</html>

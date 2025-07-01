@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clinic Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="min-h-screen flex flex-col">
+    <header class="bg-blue-700 text-white p-5 text-center shadow-md">
+      <h1 class="text-3xl font-bold">🏥 Clinic Management System</h1>
+      <p class="text-sm text-blue-200">Manage patients with ease and style</p>
+    </header>
+
+    <main class="p-6 space-y-6">
+      <!-- Dashboard cards -->
+      <div class="grid md:grid-cols-3 gap-6 text-center">
+        <!-- All Patients -->
+<!-- Inside your first card: View All Patients -->
+<div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+  <h2 class="text-xl font-semibold mb-4">View All Patients</h2>
+  <a href="patients.html" class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-800 inline-block text-center">
+    Show
+  </a>
+</div>
+
+        <!-- Search by ID -->
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <h2 class="text-xl font-semibold mb-4">Search Patient</h2>
+          <input id="patientId" type="text" placeholder="Enter Patient ID" class="w-full px-4 py-2 border rounded mb-2" />
+          <button onclick="getPatientById()" class="bg-green-600 text-white px-5 py-2 rounded hover:bg-green-800">Search</button>
+        </div>
+
+        <!-- Sort Patients -->
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <h2 class="text-xl font-semibold mb-4">Sort Patients</h2>
+          <select id="sortField" class="w-full mb-2 px-4 py-2 border rounded">
+            <option value="height">Height</option>
+            <option value="Weight">Weight</option>
+            <option value="bmi">BMI</option>
+          </select>
+          <select id="sortOrder" class="w-full mb-4 px-4 py-2 border rounded">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+          <button onclick="getSortedPatients()" class="bg-purple-600 text-white px-5 py-2 rounded hover:bg-purple-800">Sort</button>
+        </div>
+      </div>
+
+      <!-- Results Section -->
+      <div class="bg-white p-6 rounded-xl shadow overflow-x-auto">
+        <h2 class="text-lg font-semibold mb-2">Result</h2>
+        <div id="output" class="text-sm font-mono whitespace-pre-wrap"></div>
+      </div>
+    </main>
+
+    <footer class="text-center p-4 text-sm text-gray-500 mt-auto">
+      © 2025 Clinic Management Dashboard | Built with ❤️
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
